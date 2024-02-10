@@ -4,8 +4,8 @@ fun main() {
     val cardType1 = "visa"
     val cardType2 = "mastercard"
     val cardType3 = "mir"
-    val amount = 120000
-    val totalPreviousTransfer = 10000
+    val amount = 300
+    val totalPreviousTransfer = 74000
 
 
     // Проверяем по всем картам
@@ -37,8 +37,11 @@ fun calculateCommission(cardType: String, totalPreviousTransfer: Int, transferAm
 
             commission = if (totalPreviousTransfer > noLimit) {
                 (transferAmount.toDouble() * changeCommission + minCommission).toInt()
-            } else {
+            } else if (transferAmount > noLimit - totalPreviousTransfer){
                 ((transferAmount.toDouble() - (noLimit - totalPreviousTransfer)) * changeCommission + minCommission).toInt()
+            }
+            else {
+                0
             }
         }
 
